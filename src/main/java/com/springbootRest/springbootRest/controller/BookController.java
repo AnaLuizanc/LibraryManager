@@ -1,8 +1,9 @@
-package com.springbootRest.springbootRest.Controller;
+package com.springbootRest.springbootRest.controller;
 
-import com.springbootRest.springbootRest.DTO.MessageResponseDTO;
-import com.springbootRest.springbootRest.Service.BookService;
-import com.springbootRest.springbootRest.entity.Book;
+import com.springbootRest.springbootRest.dto.BookDTO;
+import com.springbootRest.springbootRest.dto.MessageResponseDTO;
+import com.springbootRest.springbootRest.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +22,7 @@ public class BookController {
     }
 
     @PostMapping
-    public MessageResponseDTO create(@RequestBody Book book) {
-        return bookService.create(book);
+    public MessageResponseDTO create(@RequestBody @Valid BookDTO bookDTO) {
+        return bookService.create(bookDTO);
     }
 }
