@@ -31,7 +31,7 @@ public class BookDTO {
 
     @NotNull(message = "ISBN não pode ser nulo")
     @Pattern(regexp = "^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$",
-             message = "ISBN deve estar em formato válido")
+            message = "ISBN deve estar em formato válido")
     private String isbn;
 
     @NotNull(message = "Nome da editora não pode ser nulo")

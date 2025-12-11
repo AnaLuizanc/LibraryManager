@@ -3,6 +3,7 @@ package com.springbootRest.springbootRest.service;
 import com.springbootRest.springbootRest.dto.BookDTO;
 import com.springbootRest.springbootRest.dto.MessageResponseDTO;
 import com.springbootRest.springbootRest.entity.Book;
+import com.springbootRest.springbootRest.mapper.BookMapper;
 import com.springbootRest.springbootRest.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,19 +12,16 @@ import org.springframework.stereotype.Service;
 public class BookService {
     private BookRepository bookRepository;
 
+    private final BookMapper bookMapper = BookMapper.INSTANCE;
+
     @Autowired
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 
     public MessageResponseDTO create(BookDTO bookDTO) {
-        Book bookToSave = Book.builder()
-                              .name(bookDTO.getName())
-                              .pages(bookDTO.getPages())
-                              .chapters(bookDTO.getChapters())
-                              .author(bookDTO.getAuthor())
-                              .build();
-        Book savedBook = bookRepository.save(bookDTO);
+        Book bookToSave = bookMapper.toModel(bookDTO);
+        Book savedBook = bookRepository.save(bookToSave);
         return MessageResponseDTO.builder().message("Book created with ID " + savedBook.getId()).build();
     }
 }
