@@ -1,4 +1,4 @@
-package com.springbootRest.springbootRest.DTO;
+package com.springbootRest.springbootRest.dto;
 
 import lombok.Builder;
 import lombok.Data;
