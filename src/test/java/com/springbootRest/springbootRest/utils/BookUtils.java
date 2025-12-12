@@ -39,8 +39,25 @@ public class BookUtils {
     }
 
     private static String generateRandomISBN() {
-        // Generate ISBN-10 format that matches the validation pattern
-        return faker.code().isbn10();
+        // Generate a valid ISBN-10 format that matches the validation pattern: only digits and hyphens
+        String isbn10 = faker.code().isbn10();
+        // Remove any 'X' characters and replace with random digit, then format properly
+        isbn10 = isbn10.replace('X', '0').replaceAll("[^0-9]", "");
+
+        // Ensure we have exactly 10 digits
+        while (isbn10.length() < 10) {
+            isbn10 += faker.number().digit();
+        }
+        if (isbn10.length() > 10) {
+            isbn10 = isbn10.substring(0, 10);
+        }
+
+        // Format as ISBN with hyphens: XXX-X-XXXX-X
+        return String.format("%s-%s-%s-%s",
+                isbn10.substring(0, 3),
+                isbn10.substring(3, 4),
+                isbn10.substring(4, 8),
+                isbn10.substring(8, 10));
     }
 
     private static String generateRandomPublisher() {
