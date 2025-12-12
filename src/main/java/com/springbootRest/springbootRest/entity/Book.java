@@ -33,14 +33,13 @@ public class Book {
 
     @Column(
             name = "publisher_name",
-            nullable = false,
-            unique = true
+            nullable = false
     )
     private String publisherName;
 
     @ManyToOne(
             fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE}
     )
     @JoinColumn(name = "author_id")
     private Author author;
