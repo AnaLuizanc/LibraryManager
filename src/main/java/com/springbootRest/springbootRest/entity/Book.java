@@ -16,10 +16,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(
-            nullable = false,
-            unique = true
-    )
+    @Column(nullable = false, unique = true)
     private String title;
 
     @Column(nullable = false)
@@ -28,19 +25,13 @@ public class Book {
     @Column(nullable = false)
     private Integer chapters;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String isbn;
 
-    @Column(
-            name = "publisher_name",
-            nullable = false
-    )
+    @Column(nullable = false)
     private String publisherName;
 
-    @ManyToOne(
-            fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE}
-    )
-    @JoinColumn(name = "author_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id", nullable = false)
     private Author author;
 }
