@@ -15,11 +15,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookDTO {
-    private Long Id;
+    private Long id;
 
     @NotNull(message = "Nome não pode ser nulo")
     @Size(min = 1, max = 200, message = "Nome deve ter entre 1 e 200 caracteres")
-    private String name;
+    private String title;
 
     @NotNull(message = "Número de páginas não pode ser nulo")
     @Min(value = 1, message = "Número de páginas deve ser maior que 0")
