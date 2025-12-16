@@ -69,4 +69,9 @@ public class BookService {
                 .map(bookMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    public BookDTO findById(final Long id) {
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        return bookMapper.toDTO(optionalBook.get());
+    }
 }
