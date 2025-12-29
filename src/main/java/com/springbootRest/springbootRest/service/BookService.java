@@ -4,6 +4,7 @@ import com.springbootRest.springbootRest.dto.BookDTO;
 import com.springbootRest.springbootRest.dto.MessageResponseDTO;
 import com.springbootRest.springbootRest.entity.Author;
 import com.springbootRest.springbootRest.entity.Book;
+import com.springbootRest.springbootRest.exception.BookNotFoundException;
 import com.springbootRest.springbootRest.mapper.BookMapper;
 import com.springbootRest.springbootRest.repository.AuthorRepository;
 import com.springbootRest.springbootRest.repository.BookRepository;
@@ -18,8 +19,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookService {
-    private BookRepository bookRepository;
-    private AuthorRepository authorRepository;
+    private final BookRepository bookRepository;
+    private final AuthorRepository authorRepository;
 
     private final BookMapper bookMapper = BookMapper.INSTANCE;
 
@@ -70,8 +71,8 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
-    public BookDTO findById(final Long id) {
-        Optional<Book> optionalBook = bookRepository.findById(id);
-        return bookMapper.toDTO(optionalBook.get());
+    public BookDTO findById(final Long id) throws BookNotFoundException {
+        Book book = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id));
+        return bookMapper.toDTO(book);
     }
 }

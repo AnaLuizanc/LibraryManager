@@ -2,6 +2,7 @@ package com.springbootRest.springbootRest.service;
 
 import com.springbootRest.springbootRest.dto.BookDTO;
 import com.springbootRest.springbootRest.entity.Book;
+import com.springbootRest.springbootRest.exception.BookNotFoundException;
 import com.springbootRest.springbootRest.repository.BookRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +25,7 @@ public class BookServiceTest {
     private BookService bookService;
 
     @Test
-    void whenGivenExistindIdThenReturnThisBook() {
+    void whenGivenExistindIdThenReturnThisBook() throws BookNotFoundException {
         Book expectedFoundBook = createFakeBook();
         when(bookRepository.findById(expectedFoundBook.getId())).thenReturn(Optional.of(expectedFoundBook));
 

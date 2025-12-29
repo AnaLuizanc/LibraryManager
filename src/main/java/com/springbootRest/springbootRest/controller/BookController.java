@@ -2,6 +2,7 @@ package com.springbootRest.springbootRest.controller;
 
 import com.springbootRest.springbootRest.dto.BookDTO;
 import com.springbootRest.springbootRest.dto.MessageResponseDTO;
+import com.springbootRest.springbootRest.exception.BookNotFoundException;
 import com.springbootRest.springbootRest.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,13 @@ public class BookController {
         }
     }
 
-    @GetMapping
+    @GetMapping()
     public List<BookDTO> listAll() {
         return bookService.listAll();
+    }
+
+    @GetMapping("/{id}")
+    public BookDTO findById(@PathVariable Long id) throws BookNotFoundException {
+        return bookService.findById(id);
     }
 }
